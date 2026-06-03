@@ -1,0 +1,56 @@
+1- MOVE ZEROES
+  class Solution {
+    public void moveZeroes(int[] nums) {
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0)
+            {
+                nums[count++]=nums[i];
+            }
+        }
+        while(count<nums.length){
+            nums[count++]=0;
+        }
+    }
+}
+
+
+
+
+  2-SQUARES OF A SORTED ARRAY
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int m=0;
+        int r=nums.length-1;
+        int[] res = new int[nums.length];
+        for(int i=nums.length-1;i>=0;i--){
+            if(Math.abs(nums[m])>Math.abs(nums[r])){
+                res[i]=nums[m]*nums[m];
+                m++;
+            }
+            else{
+                res[i]=nums[r]*nums[r];
+                r--;
+            }
+        }
+        return res;
+    }
+}
+
+
+
+
+3-CONTAINS WITH MOST WATER
+  class Solution {
+    public int maxArea(int[] height) {
+        int water=0,left=0,right=height.length-1;
+        while(left<right){
+            water=Math.max(water,Math.min (height[left],height[right])*(right-left));
+            if(height[left]>height[right])
+            right--;
+            else left++;
+        }
+        return water;
+    }
+}
+  
