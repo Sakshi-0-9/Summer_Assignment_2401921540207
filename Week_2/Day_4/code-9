@@ -1,1 +1,74 @@
+REVERSE WORDS IN A STRING 3
+class Solution {
+    public String reverseWords(String s) {
+        StringBuilder sb= new StringBuilder();
+        String[]words=s.split(" ");
+        for(String word:words){
+            StringBuilder temp=new StringBuilder(word);
+            temp.reverse();
+            sb.append(temp);
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+}
 
+
+
+
+DECODE STRING
+class Solution {
+    public String decodeString(String s) {
+        Stack<Integer>countStack= new Stack<>();
+        Stack<StringBuilder>StringStack=new Stack<>();
+        StringBuilder current =new StringBuilder();
+        int num=0;
+        for(char ch:s.toCharArray()){
+            if(Character.isDigit(ch)){
+                num=num*10+(ch-'0');
+            }
+            else if(ch=='['){
+                countStack.push(num);
+                StringStack.push(current);
+                num=0;
+                current= new StringBuilder();
+            }
+            else if (ch==']'){
+                int repeat=countStack.pop();
+                StringBuilder prev=StringStack.pop();
+                for(int i=0;i<repeat;i++){
+                    prev.append(current);
+            }
+            current=prev;
+        } else{
+            current.append(ch);
+        }
+        }
+      return current.toString();  
+    }
+}
+
+
+
+
+GENERATE PARENTHESES
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String>ans=new ArrayList<>();
+        solve ("",0,0,n,ans);
+        return ans;
+    }
+    private void solve(String curr,int open,int closed,int total,List<String>ans){
+        if(curr.length()==2*total){
+            ans.add(curr);
+            return;
+        }
+        if(open<total){
+            solve(curr+"(",open+1,closed,total,ans);
+        }
+        if(closed<open){
+            solve(curr+")",open,closed+1,total,ans);
+        }
+        
+    }
+}
