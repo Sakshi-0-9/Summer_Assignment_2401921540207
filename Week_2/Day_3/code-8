@@ -1,1 +1,67 @@
+IMPLEMENT strStr()
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int n= haystack.length();
+        int k= needle.length();
+        for(int i=0;i<=n-k;i++){
+            if(haystack.charAt(i)==needle.charAt(0)){
+            String subStr=haystack.substring(i,i+k);
+            if(subStr.equals(needle)){
+                return i;
+            }
 
+        }
+        
+    }
+    return-1;
+}
+}
+
+
+
+
+IS SUBSEQUENCE
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s.length()==0){
+            return true;
+        }
+        int i=0;
+        int j=0;
+        while(i<s.length() && j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+                j++;
+            }
+            else{
+                j++;
+            }
+        }
+        if(i==s.length()){
+            return true;
+        }
+     return false;
+        
+    }
+}
+
+
+
+
+REPEATED SUBSTRING PATTERN
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        int n=s.length();
+        for(int i=n/2;i>=1;i--){
+            if(n%1==0){
+                String substr=s.substring(0,i);
+                StringBuilder newstr=new StringBuilder();
+                for(int j=1;j<=n/i;j++)
+                newstr.append(substr);
+                if(newstr.toString().equals(s))
+                return true;
+            }
+        }
+        return false;
+    }
+}
