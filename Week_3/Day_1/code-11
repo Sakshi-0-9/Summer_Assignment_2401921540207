@@ -1,0 +1,46 @@
+LINKED LIST CYCLE
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast= head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast)
+            return true;
+        }
+        return false;
+        
+    }
+}
+
+
+
+
+REVERSE LINKED LIST
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode curr= head,prev=null,temp;
+        while(curr!=null){
+            temp=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=temp;
+        }
+  return prev;
+    }
+}
+
+
+
+MIDDLE OF THE LINKED LIST
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow=head,fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+}
