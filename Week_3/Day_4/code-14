@@ -1,0 +1,86 @@
+DAILY TEMPERATURES
+class Solution {
+    public int[] dailyTemperatures(int[] t) {
+        int[] res=new int[t.length];
+        Stack<Integer> stack=new Stack<>();
+        for(int i=0;i<t.length;i++){
+            while(!stack.empty() && t[stack.peek()]<t[i]){
+                Integer pop=stack.pop();
+                res[pop]=i-pop;
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+}
+
+
+
+
+EVALUATE REVERSE POLISH
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack= new Stack<>();
+        for(String t: tokens){
+            if(!"*/+-".contains(t)){
+                stack.push(Integer.valueOf(t));
+                continue;
+            }
+            int num2=stack.pop();
+            int num1=stack.pop();
+            stack.push(applyOperation(t,num1,num2));
+        }
+        return stack.pop();
+    }
+    private int applyOperation(String t,int num1,int num2){
+        int res=0;
+        switch(t){
+            case "*":
+            res=num1*num2;
+            break;
+            case "/":
+            res=num1/num2;
+            break;
+            case "+":
+            res=num1+num2;
+            break;
+            case "-":
+            res=num1-num2;
+            break;
+            default:     
+            }
+       return res;
+    }
+}
+
+
+
+
+
+LARGEST RECTANGLE IN HISTOGRAM
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+         Stack<Integer> stack = new Stack<>();
+        int maxArea = 0;
+        int n = heights.length;
+
+        for (int i = 0; i <= n; i++) {
+            int currHeight = (i == n) ? 0 : heights[i];
+
+            while (!stack.isEmpty() && currHeight < heights[stack.peek()]) {
+                int height = heights[stack.pop()];
+
+                int width = stack.isEmpty()
+                        ? i
+                        : i - stack.peek() - 1;
+
+                maxArea = Math.max(maxArea, height * width);
+            }
+
+            stack.push(i);
+        }
+
+        return maxArea;
+       
+    }
+}
