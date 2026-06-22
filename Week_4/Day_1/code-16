@@ -1,0 +1,42 @@
+MAXIMUM DEPTH OF BINARY TREE
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null)return 0;
+        int lh=maxDepth(root.left);
+        int rh=maxDepth(root.right);
+        return 1 + Math.max(lh,rh);
+        
+    }
+}
+
+
+
+
+INVERT BINARY TREE
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return root;
+        }
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.right = left;
+        root.left = right;
+        return root;
+    }
+}
+
+
+
+
+
+
+SAME TREE
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null || q==null){
+            return (p==q);
+        }
+        return (p.val == q.val) && isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+    }
+}
